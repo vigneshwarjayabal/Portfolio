@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "strict": true,
     "paths": {
       "@/*": ["./src/*"]
     }
