@@ -16,17 +16,25 @@ type AnimationData = any; // Change this if needed
 
 const Hero = () => {
   const [animationData, setAnimationData] = useState<AnimationData | null>(null);
+  const [resumeLink, setResumeLink] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/lottie/hello.json") // ✅ Fetch from public folder
-      .then((res) => res.json())
+    // ✅ Fetch animation from public folder
+    fetch("/lottie/hello.json")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load animation");
+        return res.json();
+      })
       .then((data) => setAnimationData(data))
       .catch((err) => console.error("Lottie load error:", err));
+
+    // ✅ Ensure resume link is client-side
+    setResumeLink("/Vigneshwarj.pdf");
   }, []);
 
   // ✅ Fix: Ensure scroll only runs in the client
   const handleScrollToContact = () => {
-    if (typeof window !== "undefined" && document) {
+    if (typeof window !== "undefined") {
       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -65,10 +73,12 @@ const Hero = () => {
             className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform">
             Contact Me
           </button>
-          <a href="/Vigneshwarj.pdf" download="Vigneshwarj.pdf" aria-label="Download Resume"
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform">
-            Download Resume
-          </a>
+          {resumeLink && (
+            <a href={resumeLink} download="Vigneshwarj.pdf" aria-label="Download Resume"
+              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform">
+              Download Resume
+            </a>
+          )}
         </div>
       </div>
 
