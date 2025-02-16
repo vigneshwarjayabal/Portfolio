@@ -6,17 +6,16 @@ import Projects from "./components/Projects";
 import Publications from "./components/Publications";
 import Contact from "./components/Contact";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <Navbar />
       <Hero />
-      <Skills/>
-      <Education/>
-      <Projects/>
-      <Publications/>
-      <Contact/>
-      <main>{children}</main>
+      <Skills />
+      <Education />
+      <Projects />
+      <Publications />
+      <Contact />
     </div>
   );
 }
