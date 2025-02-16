@@ -19,8 +19,8 @@ const Contact = () => {
             Get in Touch <span className="wave">📬</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-lg mb-6">
-            Let's connect! Whether it's about AI, ML, Data Science, or just a friendly chat, 
-            I'm always open to discussions. 🚀✨
+            Let&apos;s connect! Whether it&apos;s about AI, ML, Data Science, or just a friendly chat, 
+            I&apos;m always open to discussions. 🚀✨
           </p>
 
           {/* Contact Icons */}
