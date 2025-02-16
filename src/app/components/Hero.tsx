@@ -17,14 +17,21 @@ type AnimationData = any; // Change this if needed
 const Hero = () => {
   const [animationData, setAnimationData] = useState<AnimationData | null>(null);
   const [resumeLink, setResumeLink] = useState<string | null>(null);
+  const [animationError, setAnimationError] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       // ✅ Fetch animation only on the client
       fetch("/lottie/hello.json")
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to load animation");
+          return res.json();
+        })
         .then((data) => setAnimationData(data))
-        .catch((err) => console.error("Lottie load error:", err));
+        .catch((err) => {
+          console.error("Lottie load error:", err);
+          setAnimationError("Failed to load animation. Please try again later.");
+        });
 
       setResumeLink("/Vigneshwarj.pdf"); // ✅ Set resume link only on client
     }
@@ -82,7 +89,9 @@ const Hero = () => {
 
       {/* Right Section: Animation */}
       <div className="w-full md:w-1/2 flex justify-center">
-        {animationData ? (
+        {animationError ? (
+          <p className="text-red-500 dark:text-red-400">{animationError}</p>
+        ) : animationData ? (
           <Lottie animationData={animationData} loop className="w-[400px] md:w-[500px]" />
         ) : (
           <p className="text-gray-600 dark:text-gray-300">Loading animation...</p>
