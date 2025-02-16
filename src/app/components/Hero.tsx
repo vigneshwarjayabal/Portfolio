@@ -1,23 +1,31 @@
 "use client";
-import Lottie from "lottie-react";
-import { useEffect, useState, useMemo } from "react";
+
+import { useEffect, useState, Suspense } from "react";
+import dynamic from "next/dynamic";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { Inter, Playfair_Display } from "next/font/google";
 
+// Import fonts
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: "700" });
 
+// Dynamically import Lottie to prevent SSR issues
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
+// Define animation data type
+type AnimationData = any; // Change this if you have a stricter type
+
 const Hero = () => {
-  const [animationData, setAnimationData] = useState(null);
+  const [animationData, setAnimationData] = useState<AnimationData | null>(null);
 
   useEffect(() => {
-    fetch("/lottie/hello.json")
+    fetch("/lottie/hello.json") // ✅ Fetch from public folder
       .then((res) => res.json())
       .then((data) => setAnimationData(data))
-      .catch((err) => console.error("Lottie load error", err));
+      .catch((err) => console.error("Lottie load error:", err));
   }, []);
 
-  // Smooth Scroll to Contact Section (Client-Side Only)
+  // Scroll to Contact Section
   const handleScrollToContact = () => {
     if (typeof window !== "undefined") {
       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -89,11 +97,13 @@ const Hero = () => {
 
       {/* Right Section: Animation */}
       <div className="w-full md:w-1/2 flex justify-center">
-        {animationData ? (
-          <Lottie animationData={animationData} loop className="w-[400px] md:w-[500px]" />
-        ) : (
-          <p className="text-gray-600 dark:text-gray-300">Loading animation...</p>
-        )}
+        <Suspense fallback={<p className="text-gray-600 dark:text-gray-300">Loading animation...</p>}>
+          {animationData ? (
+            <Lottie animationData={animationData} loop className="w-[400px] md:w-[500px]" />
+          ) : (
+            <p className="text-gray-600 dark:text-gray-300">Loading animation...</p>
+          )}
+        </Suspense>
       </div>
     </section>
   );
