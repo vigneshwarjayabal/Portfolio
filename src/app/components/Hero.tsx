@@ -1,6 +1,6 @@
 "use client";
 import Lottie from "lottie-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { Inter, Playfair_Display } from "next/font/google";
 
@@ -40,13 +40,29 @@ const Hero = () => {
 
         {/* Social Icons */}
         <div className="flex justify-center md:justify-start space-x-6 mt-6">
-          <a href="https://github.com/vigneshwarjayabal" target="_blank" rel="noopener noreferrer" className="text-3xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-yellow-400 transition-all">
+          <a
+            href="https://github.com/vigneshwarjayabal"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            className="text-3xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-yellow-400 transition-all"
+          >
             <FaGithub />
           </a>
-          <a href="https://www.linkedin.com/in/vigneshwarj28/" target="_blank" rel="noopener noreferrer" className="text-3xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-yellow-400 transition-all">
+          <a
+            href="https://www.linkedin.com/in/vigneshwarj28/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            className="text-3xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-yellow-400 transition-all"
+          >
             <FaLinkedin />
           </a>
-          <a href="mailto:vigneshwarjayabal@gmail.com" className="text-3xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-yellow-400 transition-all">
+          <a
+            href="mailto:vigneshwarjayabal@gmail.com"
+            aria-label="Email"
+            className="text-3xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-yellow-400 transition-all"
+          >
             <FaEnvelope />
           </a>
         </div>
@@ -55,6 +71,7 @@ const Hero = () => {
         <div className="flex justify-center md:justify-start space-x-4 mt-6">
           <button
             onClick={handleScrollToContact}
+            aria-label="Scroll to Contact Section"
             className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform"
           >
             Contact Me
@@ -62,6 +79,7 @@ const Hero = () => {
           <a
             href="/Vigneshwarj.pdf"
             download="Vigneshwarj.pdf"
+            aria-label="Download Resume"
             className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform"
           >
             Download Resume
