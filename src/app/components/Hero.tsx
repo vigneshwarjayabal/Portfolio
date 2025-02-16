@@ -9,22 +9,30 @@ import { Inter, Playfair_Display } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: "700" });
 
-// Dynamically import Lottie for animations
+// Dynamically import Lottie for animations (only on the client)
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
+type AnimationData = any; // Change this if needed
+
 const Hero = () => {
-  const [animationData, setAnimationData] = useState<any | null>(null);
+  const [animationData, setAnimationData] = useState<AnimationData | null>(null);
+  const [resumeLink, setResumeLink] = useState<string | null>(null);
 
   useEffect(() => {
-    // ✅ Fetch animation dynamically (Correct way in Next.js)
-    fetch("/lottie/hello.json")
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data))
-      .catch((err) => console.error("Lottie JSON load error:", err));
+    if (typeof window !== "undefined") {
+      // ✅ Fetch animation only on the client
+      fetch("/lottie/hello.json")
+        .then((res) => res.json())
+        .then((data) => setAnimationData(data))
+        .catch((err) => console.error("Lottie load error:", err));
+
+      setResumeLink("/Vigneshwarj.pdf"); // ✅ Set resume link only on client
+    }
   }, []);
 
+  // ✅ Ensure `document` is used only in the browser
   const handleScrollToContact = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && document?.getElementById) {
       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -63,10 +71,12 @@ const Hero = () => {
             className="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform">
             Contact Me
           </button>
-          <a href="/Vigneshwarj.pdf" download="Vigneshwarj.pdf" aria-label="Download Resume"
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform">
-            Download Resume
-          </a>
+          {resumeLink && (
+            <a href={resumeLink} download="Vigneshwarj.pdf" aria-label="Download Resume"
+              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium rounded-lg shadow-lg hover:scale-105 transition-transform">
+              Download Resume
+            </a>
+          )}
         </div>
       </div>
 
