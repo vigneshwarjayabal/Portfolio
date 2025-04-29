@@ -33,7 +33,7 @@ const Hero = () => {
           setAnimationError("Failed to load animation. Please try again later.");
         });
 
-      setResumeLink("/Vigneshwarj.pdf"); // ✅ Set resume link only on client
+      setResumeLink("/jvigneshwar.pdf"); // ✅ Set resume link only on client
     }
   }, []);
 
