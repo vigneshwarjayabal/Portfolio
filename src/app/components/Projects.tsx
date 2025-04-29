@@ -8,32 +8,28 @@ const projects = [
     description:
       "Built a Machine Learning model to classify music genres using CNN, SVM, and KNN. Extracted features from audio signals (MFCCs & Spectrograms) and conducted a comparative analysis.",
     tech: ["Python", "CNN", "SVM", "KNN", "Audio Processing"],
-    github: "https://github.com/vigneshwarjayabal/Music_Genre_classification.git",
-    live: "http://3.109.2.236:8501/",
+    github: "https://github.com/vigneshwarjayabal/Music_Genre_classification.git"
   },
   {
     title: "Parkinson’s Disease Early Detection 🏥🧠",
     description:
       "Developed a hybrid Deep Learning model combining CNN & GNN to enhance diagnostic accuracy for Parkinson’s Disease using advanced feature extraction and graph-based analysis.",
     tech: ["Python", "CNN", "GNN", "Deep Learning", "Medical Data"],
-    github: "https://github.com/vigneshwarjayabal/Parkinsons.git",
-    live: "",
+    github: "https://github.com/vigneshwarjayabal/Parkinsons.git"
   },
   {
     title: "Multi-Disease Prediction System 🏥🤖",
     description:
       "Built an AI-powered system for predicting Parkinson’s, Liver, and Kidney Diseases using ML. Developed a Streamlit app and deployed it on AWS EC2 (Ubuntu) for cloud accessibility.",
     tech: ["Python", "Scikit-learn", "Streamlit", "AWS EC2", "NumPy"],
-    github: "https://github.com/vigneshwarjayabal/Multi_Disease_prediction.git",
-    live: "http://3.109.56.127:8501/",
+    github: "https://github.com/vigneshwarjayabal/Multi_Disease_prediction.git"
   },
   {
-    title: "Car Resale Price Prediction with AI Chatbot 🚗🤖",
+    title: "Car Resale Price Prediction with Chatbot 🚗🤖",
     description:
       "Developed an AI-powered Car Price Predictor with an interactive chatbot using ML, NLP, and cloud computing. Data stored in AWS S3 & RDS, ML models implemented for predictions.",
     tech: ["Python", "MLflow", "Streamlit", "AWS S3 & RDS", "XGBoost", "spaCy"],
-    github: "https://github.com/vigneshwarjayabal/car_price_pred.git",
-    live: "https://carpricepredandchatbot.streamlit.app/",
+    github: "https://github.com/vigneshwarjayabal/car_price_pred.git"
   },
 ];
 
@@ -92,16 +88,7 @@ const Projects = () => {
                     <FaGithub size={26} />
                   </a>
                 )}
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-700 dark:text-yellow-400 dark:hover:text-yellow-300 transition duration-300"
-                  >
-                    <FaExternalLinkAlt size={26} />
-                  </a>
-                )}
+              
               </div>
             </motion.div>
           ))}
